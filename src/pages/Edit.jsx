@@ -1,53 +1,56 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-const Edit = ({data, setData}) => {
+const Edit = ({ data, setData }) => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const current = data.find(item => item.id === parseInt(id));
+    const current = data.find((item) => item.id === parseInt(id));
 
-    const [formData, setForm] = useState({
-        product: '',
-        name: '',
-        email: '',
-        phone: '',
-        status: '',
-    });
+    const template = {
+        id: 999,
+        name: 'Liam Johnson',
+        email: 'liam.johnson@example.ca',
+        phone: '4035551234',
+        product: 'course-html',
+        status: 'new',
+    };
+
+    const isTemplate = !current;
+
+    const [formData, setForm] = useState(template);
 
     useEffect(() => {
         if (current) {
-            setForm({
-                name: current.name,
-                email: current.email,
-                phone: current.phone,
-                product: current.product,
-                status: current.status,
-            });
+            setForm(current);
         }
     }, [current]);
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
-        setForm((prev) => ({...prev, [name]: value}));
+        const { name, value } = e.target;
+        setForm((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const updated = data.map((item) => item.id === parseInt(id) ? { ...item, ...formData } : item);
+        if (!current) return; 
+
+        const updated = data.map((item) =>
+            item.id === parseInt(id) ? { ...item, ...formData } : item
+        );
         setData(updated);
         navigate('/table');
     };
 
-    if (!current) return <div>Заявка не найдена</div>;
-
     return (
-        <div className='form-wrapper'>
+        <div className='form-wrapper mt-5'>
             <div className='container-fluid'>
                 <div className='row justify-content-between align-items-center'>
                     <div className='col'>
-                        <div className='admin-heading-1'>
-                            Работа с заявкой #{id}
+                        <div className='admin-heading-1 pt-3'>
+                            {isTemplate
+                                ? 'Шаблон заявки (пример)'
+                                : `Работа с заявкой #${+id + 1}`}
                         </div>
                     </div>
                     <div className='col text-right'>
@@ -69,7 +72,9 @@ const Edit = ({data, setData}) => {
                                         <div className='col-md-2'>
                                             <strong>ID:</strong>
                                         </div>
-                                        <div className='col'>Заявка №{id}</div>
+                                        <div className='col'>
+                                            Заявка №{isTemplate ? 0 : +id + 1}
+                                        </div>
                                     </div>
 
                                     <div className='row mb-3'>
@@ -82,12 +87,22 @@ const Edit = ({data, setData}) => {
                                                 name='product'
                                                 value={formData.product}
                                                 onChange={handleChange}
+                                                disabled={isTemplate}
                                             >
-                                                <option value='course-html'>Курс по верстке</option>
-                                                <option value='course-js'>Курс по JavaScript</option>
-                                                <option value='course-vue'>Курс по VUE JS</option>
-                                                <option value='course-php'>Курс по PHP</option>
-                                                <option value='course-wordpress'>Курс по WordPress
+                                                <option value='course-html'>
+                                                    Курс по верстке
+                                                </option>
+                                                <option value='course-js'>
+                                                    Курс по JavaScript
+                                                </option>
+                                                <option value='course-vue'>
+                                                    Курс по VUE JS
+                                                </option>
+                                                <option value='course-php'>
+                                                    Курс по PHP
+                                                </option>
+                                                <option value='course-wordpress'>
+                                                    Курс по WordPress
                                                 </option>
                                             </select>
                                         </div>
@@ -100,10 +115,11 @@ const Edit = ({data, setData}) => {
                                         <div className='col'>
                                             <input
                                                 type='text'
-                                                className='form-control'
                                                 name='name'
+                                                className='form-control'
                                                 value={formData.name}
                                                 onChange={handleChange}
+                                                disabled={isTemplate}
                                             />
                                         </div>
                                     </div>
@@ -115,10 +131,11 @@ const Edit = ({data, setData}) => {
                                         <div className='col'>
                                             <input
                                                 type='email'
-                                                className='form-control'
                                                 name='email'
+                                                className='form-control'
                                                 value={formData.email}
                                                 onChange={handleChange}
+                                                disabled={isTemplate}
                                             />
                                         </div>
                                     </div>
@@ -130,10 +147,11 @@ const Edit = ({data, setData}) => {
                                         <div className='col'>
                                             <input
                                                 type='text'
-                                                className='form-control'
                                                 name='phone'
+                                                className='form-control'
                                                 value={formData.phone}
                                                 onChange={handleChange}
+                                                disabled={isTemplate}
                                             />
                                         </div>
                                     </div>
@@ -148,10 +166,8 @@ const Edit = ({data, setData}) => {
                                                 name='status'
                                                 value={formData.status}
                                                 onChange={handleChange}
+                                                disabled={isTemplate}
                                             >
-                                                <option value=''>
-                                                    Выберите...
-                                                </option>
                                                 <option value='new'>
                                                     Новая
                                                 </option>
@@ -167,16 +183,18 @@ const Edit = ({data, setData}) => {
                                 </div>
                             </div>
 
-                            <div className='row justify-content-between'>
-                                <div className='col text-right'>
-                                    <button
-                                        type='submit'
-                                        className='btn btn-primary'
-                                    >
-                                        Сохранить изменения
-                                    </button>
+                            {!isTemplate && (
+                                <div className='row justify-content-end'>
+                                    <div className='col text-right'>
+                                        <button
+                                            type='submit'
+                                            className='btn btn-primary'
+                                        >
+                                            Сохранить изменения
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </form>
                     </div>
                 </div>
