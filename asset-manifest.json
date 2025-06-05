@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/crmreact/static/css/main.dd1b6382.css",
-    "main.js": "/crmreact/static/js/main.c7dae6d8.js",
+    "main.js": "/crmreact/static/js/main.45ca6a3e.js",
     "static/media/avatar-128.jpg": "/crmreact/static/media/avatar-128.b9094e3a3cd1f186c520.jpg",
     "index.html": "/crmreact/index.html",
     "main.dd1b6382.css.map": "/crmreact/static/css/main.dd1b6382.css.map",
-    "main.c7dae6d8.js.map": "/crmreact/static/js/main.c7dae6d8.js.map"
+    "main.45ca6a3e.js.map": "/crmreact/static/js/main.45ca6a3e.js.map"
   },
   "entrypoints": [
     "static/css/main.dd1b6382.css",
-    "static/js/main.c7dae6d8.js"
+    "static/js/main.45ca6a3e.js"
   ]
 }
