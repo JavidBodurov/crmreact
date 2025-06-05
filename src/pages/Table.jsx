@@ -8,53 +8,7 @@ const Table = ({data}) => {
     const [statusFilter, setStatusFilter] = useState('all');
     const [productFilter, setProductFilter] = useState('all');
 
-    // const data = [
-    //     {
-    //         id: 0,
-    //         date: '31.01.2022',
-    //         product: 'Курс по JavaScript',
-    //         name: 'Иван Фролов',
-    //         email: 'frolov@gmail.com',
-    //         phone: '420772551797',
-    //         status: 'new',
-    //     },
-    //     {
-    //         id: 1,
-    //         date: '31.01.2022',
-    //         product: 'Курс по Vue JS',
-    //         name: 'Василий Пупкин',
-    //         email: 'pupkin@mail.ru',
-    //         phone: '420772555787',
-    //         status: 'new',
-    //     },
-    //     {
-    //         id: 2,
-    //         date: '31.01.2022',
-    //         product: 'Курс по JavaScript',
-    //         name: 'Елена Иванова',
-    //         email: 'ivanova@seznam.cz',
-    //         phone: '420772551797',
-    //         status: 'new',
-    //     },
-    //     {
-    //         id: 3,
-    //         date: '31.01.2022',
-    //         product: 'Курс по PHP',
-    //         name: 'Екатерина Похоменко',
-    //         email: 'pochomenko@mail.ru',
-    //         phone: '420777554717',
-    //         status: 'new',
-    //     },
-    //     {
-    //         id: 4,
-    //         date: '31.01.2022',
-    //         product: 'Курс по JavaScript',
-    //         name: 'Елена Иванова',
-    //         email: 'ivanova@seznam.cz',
-    //         phone: '420772551797',
-    //         status: 'new',
-    //     },
-    // ];
+    
 
     const filtered = data.filter((item) => {
         const statusOk = statusFilter === 'all' || item.status === statusFilter;
@@ -108,13 +62,11 @@ const Table = ({data}) => {
                                 }
                             >
                                 <option value='all'>Все продукты</option>
-                                <option value='Курс по JavaScript'>
-                                    Курс по JavaScript
-                                </option>
-                                <option value='Курс по Vue JS'>
-                                    Курс по Vue JS
-                                </option>
-                                <option value='Курс по PHP'>Курс по PHP</option>
+                                <option value='course-html'>Курс по верстке</option>
+                                <option value='course-js'>Курс по JavaScript</option>
+                                <option value='course-vue'>Курс по VUE JS</option>
+                                <option value='course-php'>Курс по PHP</option>
+                                <option value='course-wordpress'>Курс по WordPress</option>
                             </select>
                         </div>
                     </div>
